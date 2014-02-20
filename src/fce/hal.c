@@ -40,12 +40,10 @@ HAL是硬件抽象层(hardware abstract layer)。
 #include "nes/hal.h"
 #include "nes/fce.h"
 #include "nes/common.h"
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
 
-ALLEGRO_EVENT_QUEUE *fce_event_queue;
+/*ALLEGRO_EVENT_QUEUE *fce_event_queue;
 ALLEGRO_TIMER *fce_timer = NULL;
-static ALLEGRO_VERTEX vtx[1000000];
+static ALLEGRO_VERTEX vtx[1000000];*/
 int vtx_sz = 0;
 
   

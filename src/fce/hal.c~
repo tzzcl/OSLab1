@@ -40,8 +40,6 @@ HAL是硬件抽象层(hardware abstract layer)。
 #include "nes/hal.h"
 #include "nes/fce.h"
 #include "nes/common.h"
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
 
 ALLEGRO_EVENT_QUEUE *fce_event_queue;
 ALLEGRO_TIMER *fce_timer = NULL;
@@ -52,12 +50,12 @@ int vtx_sz = 0;
 /* 控制时间的函数，函数每次完成计算后会被调用，保证每秒执行FPS次 */
 void wait_for_frame()
 {
-    while (1)
+   /* while (1)
     {
         ALLEGRO_EVENT event;
         al_wait_for_event(fce_event_queue, &event);
         if (event.type == ALLEGRO_EVENT_TIMER) break;
-    }
+    }*/
     asm volatile ("nop");
 }
 
@@ -65,26 +63,26 @@ void wait_for_frame()
    如果不设置，Super Mario将看到黑色而不是蓝色的背景 */
 void nes_set_bg_color(int r, int g, int b, int c)
 {
-    al_clear_to_color(al_map_rgb(r, g, b));
+   /* al_clear_to_color(al_map_rgb(r, g, b));*/
 }
 
 /* 在屏幕上绘制一个像素点
    但在这个实现里，我们只是保存这个像素点，在flip_display时统一绘制 */
 void nes_draw_pixel(Pixel *p)
 {
-      ALLEGRO_VERTEX px;
+   /*   ALLEGRO_VERTEX px;
     px.x = p->x;
     px.y = p->y;
     px.z = 0;
     px.color = al_map_rgb(p->r, p->g, p->b);
-    memcpy(&vtx[vtx_sz++], &px, sizeof(ALLEGRO_VERTEX));
+    memcpy(&vtx[vtx_sz++], &px, sizeof(ALLEGRO_VERTEX));*/
 }
 
 /* 初始化一切需要的内容。
    在这里主要是调用allegro库，初始化定时器、键盘和屏幕 */
 void nes_hal_init()
 {
-    al_init();
+   /* al_init();
     al_init_primitives_addon();
     al_install_keyboard();
     al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -92,21 +90,21 @@ void nes_hal_init()
     fce_timer = al_create_timer(1.0 / FPS);
     fce_event_queue = al_create_event_queue();
     al_register_event_source(fce_event_queue, al_get_timer_event_source(fce_timer));
-    al_start_timer(fce_timer);
+    al_start_timer(fce_timer);*/
 }
 
 /* 这个函数每秒会被调用FPS次，每次调用时更新屏幕内容 */
 void nes_flip_display()
 {
-    al_draw_prim(vtx, NULL, NULL, 0, vtx_sz, ALLEGRO_PRIM_POINT_LIST);
+   /* al_draw_prim(vtx, NULL, NULL, 0, vtx_sz, ALLEGRO_PRIM_POINT_LIST);
      al_flip_display();
-    vtx_sz = 0;
+    vtx_sz = 0;*/
 }
 
 /* 询问编码为b的按键是否被按下(返回1为按下) */
 int nes_key_state(int b)
 {
-    ALLEGRO_KEYBOARD_STATE state;
+   /* ALLEGRO_KEYBOARD_STATE state;
     al_get_keyboard_state(&state);
     switch (b)
 	{
@@ -130,6 +128,6 @@ int nes_key_state(int b)
             return al_key_down(&state, ALLEGRO_KEY_D);
         default:
             return 1;
-    }
+    }*/
 }
 
