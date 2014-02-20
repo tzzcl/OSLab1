@@ -5,7 +5,7 @@ LDFLAGS = -lallegro -lallegro_main -lallegro_primitives
 CFILES = $(shell find src/ -name "*.c")
 SFILES = $(shell find src/ -name "*.S")
 OBJS = $(CFILES:.c=.o) $(SFILES:.S=.o)
-QEMU = qemu-system-i386
+
 litenes: $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o litenes
 
